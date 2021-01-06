@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--   Declaring the background service     -->
+        <service android:name=".FirstBackgroundService" />
     </application>
 
 </manifest>
