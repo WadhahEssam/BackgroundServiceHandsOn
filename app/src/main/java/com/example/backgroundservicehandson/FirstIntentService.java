@@ -28,9 +28,11 @@ public class FirstIntentService extends IntentService {
         // notice that the thread here will not be the ui thread
         Log.i(TAG, "on Handle Intent, Thread " + Thread.currentThread().getName());
 
+        int sleepTime = intent.getIntExtra("seconds", 6);
+
         // Here you should perform the task (like uploading a file or playing the music, or other stuff)
         int counter = 1;
-        while (counter <= 6) {
+        while (counter <= sleepTime) {
             Log.i(TAG, "Time elapsed : " + counter + " seconds");
             try {
                 Thread.sleep(1000); // sleep for 12 seconds

@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void startIntentService(View view) {
         Intent intent = new Intent(this, FirstIntentService.class);
+
+        // that is the way to push data to the service.
+        intent.putExtra("seconds", 12);
         startService(intent);
     }
 }
