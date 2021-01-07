@@ -19,6 +19,7 @@
 
         <!--   Declaring the background service     -->
         <service android:name=".FirstBackgroundService" />
+        <service android:name=".FirstIntentService" />
     </application>
 
 </manifest>

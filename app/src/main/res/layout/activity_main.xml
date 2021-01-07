@@ -17,5 +17,15 @@
         android:layout_height="50dp"
         android:layout_marginHorizontal="20dp"
         android:onClick="StopBackgroundService"
-        android:text="Stop background service" />
+        android:text="Stop ackground service" />
+
+    <Button
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:onClick="startIntentService"
+        android:text="Start Intent Service" />
+
+
 </LinearLayout>

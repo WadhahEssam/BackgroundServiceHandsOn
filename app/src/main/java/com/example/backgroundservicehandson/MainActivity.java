@@ -22,4 +22,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FirstBackgroundService.class);
         stopService(intent);
     }
+
+    public void startIntentService(View view) {
+        Intent intent = new Intent(this, FirstIntentService.class);
+        startService(intent);
+    }
 }
