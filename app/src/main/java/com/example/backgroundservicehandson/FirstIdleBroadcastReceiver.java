@@ -11,7 +11,6 @@ public class FirstIdleBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "Device booted", Toast.LENGTH_SHORT).show();
 
-        // This code should be executed when the device is successfully booted
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             Intent i = new Intent(context, FirstJobIntentService.class);
             i.putExtra("seconds", 12);
