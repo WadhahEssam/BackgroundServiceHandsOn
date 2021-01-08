@@ -1,23 +1,23 @@
 package com.example.backgroundservicehandson;
 
-import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.v4.app.JobIntentService;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
-public class FirstIntentService extends IntentService {
-    private static final String TAG = FirstIntentService.class.getSimpleName();
+public class FirstJobIntentService extends JobIntentService {
 
-    /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
-     * @param name Used to name the worker thread, important only for debugging.
-     */
-    public FirstIntentService() {
-        super("FirstIntentService");
+    private static final String TAG = FirstJobIntentService.class.getSimpleName();
+
+
+    // exposing the enqueue method
+    public static void enqueueWork(Context context, Intent intent) {
+        enqueueWork(context, FirstJobIntentService.class, 10, intent);
     }
+
 
     @Override
     public void onCreate() {
@@ -26,10 +26,11 @@ public class FirstIntentService extends IntentService {
         Log.i(TAG, "on Create, Thread " + Thread.currentThread().getName());
     }
 
+    // works the same as onHandleIntent in the ServiceIntent that we used before.
     @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
+    protected void onHandleWork(@NonNull Intent intent) {
         // notice that the thread here will not be the ui thread
-        Log.i(TAG, "on Handle Intent, Thread " + Thread.currentThread().getName());
+        Log.i(TAG, "on Handle Work, Thread " + Thread.currentThread().getName());
 
         // receiving the data from the intentService, and same way can be used for the startedService.
         int sleepTime = intent.getIntExtra("seconds", 6);
@@ -45,13 +46,6 @@ public class FirstIntentService extends IntentService {
             }
             counter++;
         }
-
-
-        // how to broadcast event with the data you want.
-        Intent localIntent = new Intent("first.broadcast");
-        localIntent.putExtra("result", counter);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(localIntent); // this will make sure that you are sending the broadcast inside the application
-        // sendBroadcast(localIntent) => this will send the broadcast to every one.
     }
 
     // this method will automatically be called after the work is done

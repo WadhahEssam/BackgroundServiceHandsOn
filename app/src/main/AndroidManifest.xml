@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.backgroundservicehandson">
+
+    <!--  Allow receiving the boot event  -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!--  This is needed for the jobIntentService to work on devices with api 25 and less  -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -20,6 +27,17 @@
         <!--   Declaring the background service     -->
         <service android:name=".FirstBackgroundService" />
         <service android:name=".FirstIntentService" />
+
+        <!--    Define broadcast receiver    -->
+        <receiver android:name=".FirstIdleBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!--    Bind Job Service is required for jobIntentServices to work    -->
+        <service android:permission="android.permission.BIND_JOB_SERVICE" android:name=".FirstJobIntentService" />
+
     </application>
 
 </manifest>
